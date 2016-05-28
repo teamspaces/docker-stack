@@ -1,0 +1,6 @@
+[submodule "vendors/api"]
+	path = vendors/api
+	url = git@github.com:MrTin/furrow-api.git
+[submodule "vendors/web"]
+	path = vendors/web
+	url = git@github.com:MrTin/furrow-web.git
