@@ -1,0 +1,36 @@
+version: "2"
+volumes:
+  db-data:
+  api-bundler-cache:
+services:
+  web:
+    build:
+      context: ./vendors/web
+      dockerfile: Dockerfile.development
+    volumes:
+      - ./vendors/web:/app
+    ports:
+      - "5500:4200"
+    env_file:
+      - '.env.api'
+  api:
+    build:
+      context: ./vendors/api
+      dockerfile: Dockerfile.development
+    volumes:
+      - ./vendors/api:/app
+      - api-bundler-cache:/bundler-cache
+    ports:
+      - "5510:3000"
+    env_file:
+      - '.env.api'
+    links:
+      - postgres
+  postgres:
+    image: postgres:9.5.2
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5000:5432"
+    env_file:
+      - '.env.postgres'
