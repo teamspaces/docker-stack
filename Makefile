@@ -11,6 +11,7 @@ setup:
 			--virtualbox-disk-size "30000" \
 			$(STACK_NAME)
 
+	# TODO: THIS DOESNT WORK..
 	eval "$(docker-machine env $(STACK_NAME))"
 	docker-compose build
 
