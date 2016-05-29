@@ -4,19 +4,20 @@ volumes:
   api-bundler-cache:
 services:
   web:
-    build:
-      context: ./vendors/web
-      dockerfile: Dockerfile.development
+    image: danlynn/ember-cli:2.5.1
     volumes:
-      - ./vendors/web:/app
+      - ./vendors/web:/myapp
+    command: server --watcher polling
     ports:
       - "5500:4200"
+      - "35729:35729"
     env_file:
       - '.env.api'
   api:
     build:
       context: ./vendors/api
       dockerfile: Dockerfile.development
+    command: bundle exec rails s
     volumes:
       - ./vendors/api:/app
       - api-bundler-cache:/bundler-cache
@@ -24,8 +25,6 @@ services:
       - "5510:3000"
     env_file:
       - '.env.api'
-    links:
-      - postgres
   postgres:
     image: postgres:9.5.2
     volumes:
