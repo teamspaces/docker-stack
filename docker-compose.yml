@@ -1,8 +1,36 @@
+# Services
 version: "2"
 volumes:
   db-data:
   api-bundler-cache:
 services:
+  api: &api
+    build:
+      context: ./vendors/api
+      dockerfile: Dockerfile.development
+    command: bundle exec rails s -b 0.0.0.0
+    volumes:
+      - ./vendors/api:/app
+      - api-bundler-cache:/bundler-cache
+    ports:
+      - "5510:3000"
+    env_file:
+      - '.env.api'
+    environment:
+      RAILS_ENV: development
+      DATABASE_URL: postgresql://postgres@postgres/furrow_development
+    links:
+      - postgres
+
+  api-test:
+    <<: *api
+    entrypoint: "bundle exec"
+    command: ""
+    ports: []
+    environment:
+      RAILS_ENV: test
+      DATABASE_URL: postgresql://postgres@postgres/furrow_test
+
   web:
     image: danlynn/ember-cli:2.5.1
     volumes:
@@ -13,23 +41,29 @@ services:
       - "35729:35729"
     env_file:
       - '.env.api'
-  api:
+
+  hive:
     build:
-      context: ./vendors/api
+      context: ./vendors/hive
       dockerfile: Dockerfile.development
-    command: bundle exec rails s
+    command: hive -s orm -s http -s queue
     volumes:
-      - ./vendors/api:/app
-      - api-bundler-cache:/bundler-cache
+      - ./vendors/hive:/app
     ports:
-      - "5510:3000"
+      - "5520:80"
     env_file:
-      - '.env.api'
+      - '.env.hive'
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://postgres@postgres/hive_development # TODO: not being used
+    links:
+      - postgres
+
   postgres:
     image: postgres:9.5.2
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
-      - "5000:5432"
+      - "5600:5432"
     env_file:
       - '.env.postgres'

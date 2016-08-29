@@ -4,3 +4,6 @@
 [submodule "vendors/web"]
 	path = vendors/web
 	url = git@github.com:MrTin/furrow-web.git
+[submodule "vendors/hive"]
+	path = vendors/hive
+	url = git@github.com:MrTin/furrow-hive.git

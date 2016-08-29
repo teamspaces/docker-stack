@@ -1,5 +1,7 @@
 STACK_NAME = furrow
 
+reset: clean setup
+
 setup:
 	git submodule update --init
 
@@ -11,9 +13,11 @@ setup:
 			--virtualbox-disk-size "30000" \
 			$(STACK_NAME)
 
-	# TODO: THIS DOESNT WORK..
-	eval "$(docker-machine env $(STACK_NAME))"
-	docker-compose build
+clean:
+	-docker-machine rm $(STACK_NAME)
+
+start:
+	docker-machine start $(STACK_NAME)
 
 stop:
 	docker-machine stop $(STACK_NAME)
