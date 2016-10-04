@@ -25,7 +25,7 @@ services:
   api-test:
     <<: *api
     entrypoint: "bundle exec"
-    command: ""
+    command: "rails test"
     ports: []
     environment:
       RAILS_ENV: test
@@ -41,23 +41,6 @@ services:
       - "35729:35729"
     env_file:
       - '.env.api'
-
-  hive:
-    build:
-      context: ./vendors/hive
-      dockerfile: Dockerfile.development
-    command: hive -s orm -s http -s queue
-    volumes:
-      - ./vendors/hive:/app
-    ports:
-      - "5520:80"
-    env_file:
-      - '.env.hive'
-    environment:
-      NODE_ENV: development
-      DATABASE_URL: postgresql://postgres@postgres/hive_development # TODO: not being used
-    links:
-      - postgres
 
   postgres:
     image: postgres:9.5.2
