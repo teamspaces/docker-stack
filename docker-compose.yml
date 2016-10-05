@@ -1,9 +1,10 @@
 # Services
 version: "2"
 volumes:
+  api-bundler-cache:
   db-data:
   mongo-data:
-  api-bundler-cache:
+  redis-data:
 services:
   api: &api
     build:
@@ -21,7 +22,9 @@ services:
       RAILS_ENV: development
       DATABASE_URL: postgresql://postgres@postgres/furrow_development
     links:
+      - redis
       - postgres
+      - mongo
 
   api-test:
     <<: *api
@@ -40,10 +43,10 @@ services:
     ports:
       - "5520:8080"
     env_file:
-      - '.env.api'
-    environment:
-      NODE_ENV: development
-      MONGO_URL: mongodb://mongo@mongo/furrow_development
+      - '.env.collab'
+    links:
+      - redis
+      - mongo
 
   web:
     image: danlynn/ember-cli:2.5.1
@@ -72,3 +75,10 @@ services:
     ports:
       - "27500:27017"
     command: mongod --smallfiles --logpath=/dev/null
+
+  redis:
+    image: redis:3.2
+    ports:
+      - "6500:6379"
+    volumes:
+      - redis-data:/data
