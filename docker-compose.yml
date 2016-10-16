@@ -5,6 +5,7 @@ volumes:
   db-data:
   mongo-data:
   redis-data:
+  apt-cache:
 services:
   api: &api
     build:
@@ -82,3 +83,12 @@ services:
       - "6500:6379"
     volumes:
       - redis-data:/data
+
+  # https://github.com/sameersbn/docker-apt-cacher-ng
+  apt-cacher:
+    image: sameersbn/apt-cacher-ng:latest
+    volumes:
+      - apt-cache:/var/cache/apt-cacher-ng
+    ports:
+      - "8200:3142"
+    restart: always
