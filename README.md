@@ -17,6 +17,19 @@ Making the lives easier for everyone. Developer happiness guaranteed.
 
 ### Usage
 
+### Configure services
+
+#### API
+- `docker-compose run api bundle install`
+- `docker-compose run api npm install`
+- `docker-compose run api bundle exec rake db:setup`
+
+#### API-test
+- `docker-compose run api-test bundle exec rake db:setup`
+
+#### Collab
+- `docker-compose run collab npm install`
+
 #### Start
 
   ```bash
