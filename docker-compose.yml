@@ -2,6 +2,7 @@
 version: "2"
 volumes:
   api-bundler-cache:
+  collab-npm-cache:
   db-data:
   mongo-data:
   redis-data:
@@ -41,6 +42,9 @@ services:
       context: ./vendors/collab
       dockerfile: Dockerfile.development
     command: npm start
+    volumes:
+      - ./vendors/collab:/app
+      - collab-npm-cache:/node_modules
     ports:
       - "5520:8080"
     env_file:
