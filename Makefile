@@ -1,10 +1,10 @@
 setup: install clean
-	git submodule update --init
 
 start:
 	docker-compose up --force-recreate
 
 install:
+	git submodule update --init
 	docker-compose run web bundle install
 	docker-compose run web npm install
 	docker-compose run web bundle exec rails db:setup
