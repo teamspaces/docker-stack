@@ -1,9 +1,6 @@
-[submodule "vendors/api"]
-	path = vendors/api
-	url = git@github.com:MrTin/furrow-api.git
-[submodule "vendors/web"]
-	path = vendors/web
-	url = git@github.com:MrTin/furrow-web.git
-[submodule "vendors/collab"]
-	path = vendors/collab
-	url = git@github.com:MrTin/furrow-collab.git
+[submodule "vendor/web"]
+	path = vendor/web
+	url = git@github.com:teamspaces/web.git
+[submodule "vendor/collab"]
+	path = vendor/collab
+	url = git@github.com:teamspaces/collab.git

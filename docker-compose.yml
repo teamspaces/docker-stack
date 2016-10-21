@@ -1,25 +1,26 @@
-# Services
 version: "2"
+
 volumes:
-  api-bundler-cache:
+  web-bundler-cache:
   collab-npm-cache:
-  db-data:
+  postgres-data:
   mongo-data:
   redis-data:
   apt-cache:
+
 services:
-  api: &api
+  web: &web
     build:
-      context: ./vendors/api
+      context: ./vendor/web
       dockerfile: Dockerfile.development
     command: bundle exec rails s -b 0.0.0.0
     volumes:
-      - ./vendors/api:/app
-      - api-bundler-cache:/bundler-cache
+      - ./vendor/web:/app
+      - web-bundler-cache:/bundler-cache
     ports:
       - "5510:3000"
     env_file:
-      - .env.api
+      - .env.web
     environment:
       RAILS_ENV: development
       DATABASE_URL: postgresql://postgres@postgres/furrow_development
@@ -28,8 +29,8 @@ services:
       - postgres
       - mongo
 
-  api-test:
-    <<: *api
+  web-test:
+    <<: *web
     entrypoint: "bundle exec"
     command: ""
     ports: []
@@ -39,11 +40,11 @@ services:
 
   collab:
     build:
-      context: ./vendors/collab
+      context: ./vendor/collab
       dockerfile: Dockerfile.development
     command: npm start
     volumes:
-      - ./vendors/collab:/app
+      - ./vendor/collab:/app
       - collab-npm-cache:/node_modules
     ports:
       - "5520:3000"
@@ -52,22 +53,11 @@ services:
     links:
       - redis
       - mongo
-  #
-  # web:
-  #   image: danlynn/ember-cli:2.5.1
-  #   volumes:
-  #     - ./vendors/web:/myapp
-  #   command: server --watcher polling
-  #   ports:
-  #     - "5530:4200"
-  #     - "35729:35729"
-  #   env_file:
-  #     - .env.web
 
   postgres:
     image: postgres:9.5.2
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
     ports:
       - "5600:5432"
     env_file:
