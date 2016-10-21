@@ -52,17 +52,17 @@ services:
     links:
       - redis
       - mongo
-
-  web:
-    image: danlynn/ember-cli:2.5.1
-    volumes:
-      - ./vendors/web:/myapp
-    command: server --watcher polling
-    ports:
-      - "5530:4200"
-      - "35729:35729"
-    env_file:
-      - .env.web
+  #
+  # web:
+  #   image: danlynn/ember-cli:2.5.1
+  #   volumes:
+  #     - ./vendors/web:/myapp
+  #   command: server --watcher polling
+  #   ports:
+  #     - "5530:4200"
+  #     - "35729:35729"
+  #   env_file:
+  #     - .env.web
 
   postgres:
     image: postgres:9.5.2
