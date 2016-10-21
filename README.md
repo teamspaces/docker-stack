@@ -17,6 +17,8 @@ Developer happiness guaranteed. :surfer: :speedboat: :rocket: :dancing_women:
 
   * `make start` spins up the full stack for you.
 
+  * `make clean` kills containers left from `run` commands.
+
   * `docker-compose run collab npm install --save my-cute-package`
 
   * `docker-compose run web bundle install`
