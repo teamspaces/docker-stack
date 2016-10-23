@@ -6,6 +6,7 @@ volumes:
   postgres-data:
   mongo-data:
   redis-data:
+  elasticsearch-data:
   apt-cache:
 
 services:
@@ -77,6 +78,16 @@ services:
       - "6500:6379"
     volumes:
       - redis-data:/data
+
+  elasticsearch:
+    image: elasticsearch:5
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    environment:
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
 
   # https://github.com/sameersbn/docker-apt-cacher-ng
   apt-cacher:
