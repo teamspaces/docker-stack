@@ -3,6 +3,9 @@ setup: install clean
 start:
 	docker-compose up --force-recreate
 
+stop:
+	docker-compose down
+
 install:
 	git submodule update --init
 	docker-compose run web bundle install
