@@ -38,6 +38,12 @@ services:
       RAILS_ENV: test
       DATABASE_URL: postgresql://postgres@postgres/furrow_test
 
+  web-gulp:
+    <<: *web
+    entrypoint: ""
+    command: "gulp"
+    ports: []
+
   collab:
     build:
       context: ./vendor/collab
