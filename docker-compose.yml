@@ -12,7 +12,7 @@ services:
   web: &web
     build:
       context: ./vendor/web
-      dockerfile: Dockerfile.development
+      dockerfile: dockerfiles/development
     command: bundle exec rails s -b 0.0.0.0
     volumes:
       - ./vendor/web:/app
