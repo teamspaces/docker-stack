@@ -47,7 +47,7 @@ services:
   collab:
     build:
       context: ./vendor/collab
-      dockerfile: Dockerfile.development
+      dockerfile: dockerfiles/development
     command: npm start
     volumes:
       - ./vendor/collab:/app
