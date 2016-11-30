@@ -13,12 +13,12 @@ services:
     build:
       context: ./vendor/web
       dockerfile: dockerfiles/development
-    command: bundle exec rails s -b 0.0.0.0
+    command: bundle exec rails s -b 0.0.0.0 -p 5510
     volumes:
       - ./vendor/web:/app
       - web-bundler-cache:/bundler-cache
     ports:
-      - "5510:3000"
+      - "5510:5510"
     env_file:
       - .env.web
     environment:
@@ -38,12 +38,6 @@ services:
       RAILS_ENV: test
       DATABASE_URL: postgresql://postgres@postgres/furrow_test
 
-  web-gulp:
-    <<: *web
-    entrypoint: ""
-    command: "gulp"
-    ports: []
-
   collab:
     build:
       context: ./vendor/collab
@@ -53,7 +47,7 @@ services:
       - ./vendor/collab:/app
       - collab-npm-cache:/node_modules
     ports:
-      - "5520:3000"
+      - "5520:5520"
     env_file:
       - .env.collab
     links:
@@ -85,10 +79,10 @@ services:
       - redis-data:/data
 
   # https://github.com/sameersbn/docker-apt-cacher-ng
-  apt-cacher:
-    image: sameersbn/apt-cacher-ng:latest
-    volumes:
-      - apt-cache:/var/cache/apt-cacher-ng
-    ports:
-      - "8200:3142"
-    restart: always
+  # apt-cacher:
+  #   image: sameersbn/apt-cacher-ng:latest
+  #   volumes:
+  #     - apt-cache:/var/cache/apt-cacher-ng
+  #   ports:
+  #     - "8200:3142"
+  #   restart: always

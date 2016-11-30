@@ -7,8 +7,8 @@ stop:
 	docker-compose down
 
 install:
-	git submodule update --init
-	docker-compose up -d apt-cacher
+	git submodule update --init --recursive --remote
+	# docker-compose up -d apt-cacher
 	docker-compose run web bundle install
 	docker-compose run web npm install
 	docker-compose run web bundle exec rails db:setup
