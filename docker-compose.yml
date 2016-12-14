@@ -23,7 +23,7 @@ services:
       - .env.web
     environment:
       RAILS_ENV: development
-      DATABASE_URL: postgresql://postgres@postgres/furrow_development
+      DATABASE_URL: postgresql://postgres@postgres/spaces_development
     links:
       - redis
       - postgres
@@ -36,7 +36,7 @@ services:
     ports: []
     environment:
       RAILS_ENV: test
-      DATABASE_URL: postgresql://postgres@postgres/furrow_test
+      DATABASE_URL: postgresql://postgres@postgres/spaces_test
 
   collab:
     build:
