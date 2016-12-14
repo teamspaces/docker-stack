@@ -1,4 +1,4 @@
-# Furrow Stack
+# Spaces Stack
 Setup a full cluster of services to get started developing in no time.
 Developer happiness guaranteed. :surfer: :speedboat: :rocket: :dancing_women:
 
