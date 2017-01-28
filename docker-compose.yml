@@ -29,6 +29,12 @@ services:
       - postgres
       - mongo
 
+  web-worker:
+    <<: *web
+    entrypoint: "bundle exec"
+    command: "sidekiq -C config/sidekiq.yml"
+    ports: []
+
   web-test:
     <<: *web
     entrypoint: "bundle exec"
