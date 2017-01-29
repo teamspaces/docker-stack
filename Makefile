@@ -17,3 +17,4 @@ install:
 
 clean:
 	docker-compose rm -f
+	rm -f /vendor/web/tmp/pids/server.pid
