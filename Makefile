@@ -1,6 +1,7 @@
 setup: install clean
 
 start:
+	rm -f vendor/web/tmp/pids/server.pid
 	docker-compose up --force-recreate
 
 stop:
