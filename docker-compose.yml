@@ -89,12 +89,3 @@ services:
     image: schickling/mailcatcher:latest
     ports:
       - 1080:1080
-
-  # https://github.com/sameersbn/docker-apt-cacher-ng
-  # apt-cacher:
-  #   image: sameersbn/apt-cacher-ng:latest
-  #   volumes:
-  #     - apt-cache:/var/cache/apt-cacher-ng
-  #   ports:
-  #     - "8200:3142"
-  #   restart: always
