@@ -1,4 +1,4 @@
-# Furrow Stack
+# Spaces Stack
 Setup a full cluster of services to get started developing in no time.
 Developer happiness guaranteed. :surfer: :speedboat: :rocket: :dancing_women:
 
@@ -24,3 +24,9 @@ Developer happiness guaranteed. :surfer: :speedboat: :rocket: :dancing_women:
   * `docker-compose run web bundle install`
 
   * `docker-compose run web-test rails test test/controllers/welcome_controller.rb`
+
+## Production @ Cloud 66
+
+### Install toolchain
+
+  Run `curl -sSL https://s3.amazonaws.com/downloads.cloud66.com/cx_installation/cx_install.sh | bash`
