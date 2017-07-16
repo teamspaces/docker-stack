@@ -29,6 +29,7 @@ usage:
 	@echo "- 'make setup_database' setup database"
 	@echo "- 'make migrate' migrate database"
 	@echo "- 'make build_assets' build assets"
+	@echo "- 'make clean_setup' re-build and setup again from scratch"
 	@echo "- 'make usage' see this message again"
 	@echo ""
 
@@ -51,8 +52,8 @@ npm_collab:
 	docker-compose run --rm collab npm install
 
 setup_database:
-	docker-compose run --rm web bundle exec rails db:setup db:migrate
-	docker-compose run --rm web-test bundle exec rails db:setup db:migrate
+	docker-compose run --rm web bundle exec rails db:setup
+	docker-compose run --rm web-test bundle exec rails db:setup
 
 reset_database:
 	docker-compose run --rm web bundle exec rails db:reset
