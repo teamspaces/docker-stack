@@ -89,12 +89,12 @@ services:
   elasticsearch:
     image: elasticsearch:5.3
     ports:
-      - "9200:9200"
-      - "9300:9300"
+      - "9292:9200"
+      - "9393:9300"
     volumes:
       - spaces-elasticsearch-data:/usr/share/elasticsearch/data
-    environment:
-      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+    env_file:
+      - .env.elasticsearch
 
   mailcatcher:
     image: schickling/mailcatcher:latest
