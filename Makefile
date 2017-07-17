@@ -14,7 +14,7 @@ help: usage
 usage:
 	@echo ""
 	@echo "Handy URLs for you:"
-	@echo "- https://what.lvh.me:5510/landing"
+	@echo "- http://what.lvh.me:5510/landing"
 	@echo ""
 	@echo "Usage:"
 	@echo "- 'make start' spin up all containers"

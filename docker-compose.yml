@@ -1,12 +1,12 @@
 version: "2"
 
 volumes:
-  web-bundler-cache:
-  collab-npm-cache:
-  postgres-data:
-  mongo-data:
-  redis-data:
-  apt-cache:
+  spaces-web-bundler-cache:
+  spaces-collab-npm-cache:
+  spaces-postgres-data:
+  spaces-mongo-data:
+  spaces-redis-data:
+  spaces-elasticsearch-data:
 
 services:
   web: &web
@@ -16,7 +16,7 @@ services:
     command: bundle exec rails s -b 0.0.0.0 -p 5510
     volumes:
       - ./vendor/web:/app
-      - web-bundler-cache:/bundler-cache
+      - spaces-web-bundler-cache:/bundler-cache
     ports:
       - "5510:5510"
     env_file:
@@ -28,6 +28,7 @@ services:
       - redis
       - postgres
       - mongo
+      - elasticsearch
       - mailcatcher
 
   web-worker:
@@ -52,7 +53,7 @@ services:
     command: npm start
     volumes:
       - ./vendor/collab:/app
-      - collab-npm-cache:/node_modules
+      - spaces-collab-npm-cache:/node_modules
     ports:
       - "5520:5520"
     env_file:
@@ -64,7 +65,7 @@ services:
   postgres:
     image: postgres:9.5.2
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - spaces-postgres-data:/var/lib/postgresql/data
     ports:
       - "5600:5432"
     env_file:
@@ -73,7 +74,7 @@ services:
   mongo:
     image: mongo:3.2
     volumes:
-      - mongo-data:/data/db
+      - spaces-mongo-data:/data/db
     ports:
       - "27500:27017"
     command: mongod --smallfiles --logpath=/dev/null
@@ -83,7 +84,17 @@ services:
     ports:
       - "6500:6379"
     volumes:
-      - redis-data:/data
+      - spaces-redis-data:/data
+
+  elasticsearch:
+    image: elasticsearch:5.3
+    ports:
+      - "9292:9200"
+      - "9393:9300"
+    volumes:
+      - spaces-elasticsearch-data:/usr/share/elasticsearch/data
+    env_file:
+      - .env.elasticsearch
 
   mailcatcher:
     image: schickling/mailcatcher:latest
