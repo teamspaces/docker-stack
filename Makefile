@@ -83,4 +83,4 @@ console:
 	docker-compose run --rm web bundle exec rails console
 
 test:
-	docker-compose run --rm web bundle exec rails test
+	docker-compose run --rm web-test bundle exec rails test
