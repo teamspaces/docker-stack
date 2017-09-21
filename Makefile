@@ -74,10 +74,10 @@ migrate:
 	docker-compose run --rm web bundle exec rails db:migrate
 
 build_assets:
-	 docker-compose run --rm web webpack --progress --colors
+	 docker-compose run --rm web ./bin/webpack --progress --colors
 
 assets:
-	docker-compose run --rm web webpack --progress --colors --watch
+	docker-compose run --rm web ./bin/webpack --progress --colors --watch
 
 console:
 	docker-compose run --rm web bundle exec rails console
